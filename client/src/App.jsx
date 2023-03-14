@@ -1,6 +1,7 @@
+import { useState } from "react";
 
 
-function App() {
+const App = () => {
 
   return (
     <div className="app">
@@ -8,5 +9,15 @@ function App() {
     </div>
   )
 }
-
 export default App
+
+// function App() {
+
+//   return (
+//     <div className="app">
+//       app
+//     </div>
+//   )
+// }
+
+// export default App
