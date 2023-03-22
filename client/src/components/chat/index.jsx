@@ -18,7 +18,6 @@ const Chat = () => {
           style={{height: "100vh"}}
           renderChatHeader={(chat) => <Header chat={chat}/>}
           renderMessageForm={(props) => {
-            console.log(props);
             return (
               <StandardMessageForm props={props} activeChat={chatProps.chat} />
             )

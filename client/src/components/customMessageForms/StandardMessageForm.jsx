@@ -1,5 +1,5 @@
 import { useState } from "react"
-import MessageFormUi from "@/MessageFormUi";
+import MessageFormUi from "./MessageFormUi";
 
 
 const StandardMessageForm = ({props, activeChat}) => {
