@@ -2,7 +2,7 @@ import { PaperAirplaneIcon, PaperClipIcon, XMarkIcon } from "@heroicons/react/24
 import { useState } from "react"
 import Dropzone from "react-dropzone";
 
-const MessageFormUi = ({setAttachment, handleMessageChange, handleSubmit, message}) => {
+const MessageFormUi = ({setAttachment, handleChange, handleSubmit, message}) => {
 
   const [preview, setPreview] = useState('');
 
@@ -30,7 +30,7 @@ const MessageFormUi = ({setAttachment, handleMessageChange, handleSubmit, messag
                 className="message-form-input"
                 type="text"
                 value={message}
-                onChange={handleMessageChange}
+                onChange={handleChange}
                 placeholder='Send a message ...'
             />
         </div>
