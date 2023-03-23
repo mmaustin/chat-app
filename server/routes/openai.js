@@ -18,10 +18,11 @@ router.post('/text', async(req, res)=> {
             top_p: 1,
             frequency_penalty: 0.5,
             presence_penalty: 0,
-        })
+        });
 
         await axios.post(
-            `https://api.chatengine.io/chats${activeChatId}/messages/`,
+            `https://api.chatengine.io/chats/${activeChatId}/messages/`,
+            {text: response.data.choices[0].text},
             {
                 headers: {
                     "Project-ID": process.env.PROJECT_ID,
@@ -31,7 +32,7 @@ router.post('/text', async(req, res)=> {
             }
         );
 
-        res.status(200).json({text});   
+        res.status(200).json({text: response.data.choices[0].text});   
     } catch (error) {
         console.error('error', error);
         res.status(500).json({ error: error.message})
