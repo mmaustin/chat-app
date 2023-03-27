@@ -19,7 +19,7 @@ router.post('/text', async(req, res)=> {
             frequency_penalty: 0.5,
             presence_penalty: 0,
         });
-
+        
         await axios.post(
             `https://api.chatengine.io/chats/${activeChatId}/messages/`,
             {text: response.data.choices[0].text},
@@ -30,21 +30,22 @@ router.post('/text', async(req, res)=> {
                     "User-Secret": process.env.BOT_USER_SECRET,
                 }
             }
-        );
-
-        res.status(200).json({text: response.data.choices[0].text});   
-    } catch (error) {
-        console.error('error', error);
-        res.status(500).json({ error: error.message})
-    }
-});
-
-router.post('/code', async(req, res)=> {
-    try {
-        const {text, activeChatId} = req.body;
+            );
+            
+            res.status(200).json({text: response.data.choices[0].text});   
+        } catch (error) {
+            console.error('error', error);
+            res.status(500).json({ error: error.message})
+        }
+    });
+    
+    router.post('/code', async(req, res)=> {
+        try {
+            const {text, activeChatId} = req.body;
+            console.log('text:', text);
         
         const response = await openai.createCompletion({
-            model: "code-davinci-002",
+            model: "code-davinci-edit-001",
             prompt: text,
             temperature: 0.5,
             max_tokens: 2048,
@@ -67,7 +68,7 @@ router.post('/code', async(req, res)=> {
         );
         res.status(200).json({text: response.data.choices[0].text});   
     } catch (error) {
-        //console.error('error', error);
+        console.error('error', error.response.data.error);
         res.status(500).json({ error: error.message})
     }
 });
