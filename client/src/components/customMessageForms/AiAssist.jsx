@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MessageFormUi from "./MessageFormUi";
 
 const useDebounce = (value, delay) => {
-    const [debouncedVAlue, setDebouncedValue] = useState(value);
+    const [debouncedValue, setDebouncedValue] = useState(value);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -13,7 +13,9 @@ const useDebounce = (value, delay) => {
       return () => {
         clearTimeout(handler);
       }
-    })
+    }, [value, delay]);
+
+    return debouncedValue;
     
 }
 
@@ -42,7 +44,18 @@ const AiAssist = ({props, activeChat}) => {
       props.onSubmit(form);
       setMessage("");
       setAttachment("");
-  };
+    };
+    
+    
+    const debouncedValue = useDebounce(message, 1000);
+
+    useEffect(() => {
+      if(debouncedValue){
+        const form = { text: message};
+        triggerAssist(form);
+      }
+    }, [debouncedValue]); //eslint-disable-line
+    
 
   return (
     <MessageFormUi
@@ -52,8 +65,5 @@ const AiAssist = ({props, activeChat}) => {
         handleSubmit={handleSubmit}
     />
   )
-
-    const debouncedValue = useDebounce(message, 1000);
-
 }
 export default AiAssist;
