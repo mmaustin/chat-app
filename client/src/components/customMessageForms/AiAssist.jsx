@@ -23,6 +23,7 @@ const AiAssist = ({props, activeChat}) => {
 
   const [message, setMessage] = useState('');
   const [attachment, setAttachment] = useState('');
+  const [appendText, setAppendText] = useState('');
   const [triggerAssist] = usePostAiAssistMutation();
  
   const handleChange = (e) => setMessage(e.target.value);
@@ -55,6 +56,14 @@ const AiAssist = ({props, activeChat}) => {
         triggerAssist(form);
       }
     }, [debouncedValue]); //eslint-disable-line
+
+    const handleKeyDown = e => {
+        //handle tab and enter keys
+        if(e.keyCode === 9 || e.keyCode === 13){
+            e.preventDefault();
+            setMessage(`${message} ${appendText}`);
+        }
+    }
     
 
   return (
