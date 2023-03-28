@@ -24,7 +24,7 @@ const AiAssist = ({props, activeChat}) => {
   const [message, setMessage] = useState('');
   const [attachment, setAttachment] = useState('');
   const [appendText, setAppendText] = useState('');
-  const [triggerAssist] = usePostAiAssistMutation();
+  const [triggerAssist, resultAssist] = usePostAiAssistMutation();
  
   const handleChange = (e) => setMessage(e.target.value);
 
@@ -62,8 +62,16 @@ const AiAssist = ({props, activeChat}) => {
         if(e.keyCode === 9 || e.keyCode === 13){
             e.preventDefault();
             setMessage(`${message} ${appendText}`);
-        }
+        };
+        setAppendText('');
     }
+
+    useEffect(() => {
+      if(resultAssist.data?.text){
+        setAppendText(resultAssist.data?.text);
+      }
+    }, [resultAssist]); //eslint-disable-line
+    
     
 
   return (
