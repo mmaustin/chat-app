@@ -1,9 +1,20 @@
 import { usePostAiAssistMutation } from "@/state/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MessageFormUi from "./MessageFormUi";
 
 const useDebounce = (value, delay) => {
     const [debouncedVAlue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay)
+
+      return () => {
+        clearTimeout(handler);
+      }
+    })
+    
 }
 
 const AiAssist = ({props, activeChat}) => {
