@@ -6,12 +6,12 @@ import AiCode from "@/components/customMessageForms/AiCode";
 import AiAssist from "@/components/customMessageForms/AiAssist";
 
 
-const Chat = () => {
+const Chat = ({user, secret}) => {
   //chatProps is an object with tons of values, passed down to components below
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
-    "rooster",
-    "rooster"
+    user,
+    secret
   )
    
   return (
