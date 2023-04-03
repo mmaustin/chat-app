@@ -17,6 +17,14 @@ const Login = () => {
         triggerRegister({username, password});
     }
 
+    useEffect(() => {
+      if(resultLogin?.data){
+        setUsername(username);
+        setPassword(password);
+      }
+    }, [resultLogin.data]) //eslint-disable-line
+    
+
   return (
     <div>Login</div>
   )
