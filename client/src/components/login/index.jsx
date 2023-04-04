@@ -1,7 +1,7 @@
 import { usePostLoginMutation, usePostRegisterMutation } from "@/state/api";
 import { useState, useEffect } from "react";
 
-const Login = () => {
+const Login = ({setUser, setSecret}) => {
 
     const [isRegister, setIsRegister] = useState(false);
     const [username, setUsername] = useState('');
@@ -19,14 +19,37 @@ const Login = () => {
 
     useEffect(() => {
       if(resultLogin?.data){
-        setUsername(username);
-        setPassword(password);
+        setUser(username);
+        setSecret(password);
       }
     }, [resultLogin.data]) //eslint-disable-line
     
 
   return (
-    <div>Login</div>
+    <div className="login-page">
+      <div className="login-container">
+        <h2 className="title">CHATGPT APP</h2>
+        <p className="register-change" onClick={()=> setIsRegister(!isRegister)}>
+          {isRegister ? "Already a User?" : "Are you a new User?"}
+        </p>
+        <div>
+          <input
+            className="login-input"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e)=> setUsername(e.target.value)}
+          />
+          <input
+            className="login-input"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e)=> setPassword(e.target.value)}
+          />
+        </div>
+      </div>
+    </div>
   )
 }
 export default Login
