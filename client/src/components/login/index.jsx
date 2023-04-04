@@ -52,7 +52,7 @@ const Login = ({setUser, setSecret}) => {
           {isRegister ? (
             <button type="button" onClick={handleRegister}>Register</button>
           ) : (
-            <button type="button" onClick={handleLogin}></button>
+            <button type="button" onClick={handleLogin}>Login</button>
           )}
         </div>
       </div>
